@@ -37,13 +37,18 @@ _use_poetry_check-version() {
   log "INFO" "POETRY > 'pyproject.toml' version matches '${1}'."
 }
 
+_use_poetry_install-dependencies() {
+  log "DEBUG" "POETRY > Installing project dependencies."
+  poetry install --verbose --no-root
+}
+
 _use_poetry_install-poetry() {
   log "DEBUG" "POETRY > Installing poetry."
   python -m pip install poetry --verbose
 }
 
 _use_poetry_install-project() {
-  log "DEBUG" "POETRY > Installing project requirements."
+  log "DEBUG" "POETRY > Installing project."
   poetry install --verbose
 }
 
@@ -52,8 +57,9 @@ _use_poetry_usage() {
   log "ERROR" "USAGE: poetry.sh [COMMAND]"
   log "ERROR" "  COMMANDS:"
   log "ERROR" "  check-version [VERSION]  - Compare the given semantic version to the 'pyproject.toml' file."
+  log "ERROR" "  install-dependencies     - Install the 'pyproject.toml' dependencies."
   log "ERROR" "  install-poetry           - Install poetry."
-  log "ERROR" "  install-project          - Install the 'pyproject.toml' file with poetry."
+  log "ERROR" "  install-project          - Install the project and 'pyproject.toml' dependencies."
   exit 127
 }
 
